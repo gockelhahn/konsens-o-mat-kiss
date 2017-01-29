@@ -154,8 +154,26 @@ function calculate_result() {
     // reset statements
     valid_statements = 0;
     
+    // sort party array by id asc
+    party.sort(function(a, b) { 
+        return a.id - b.id;
+    });
+    
+    // sort statement array by id asc
+    statement.sort(function(a, b) { 
+        return a.id - b.id;
+    });
+    
+    // sort opinion by party asc,statement asc
+    opinion.sort(function(a, b) {
+        if (a.party != b.party) {
+            return a.party - b.party;
+        };
+        return a.statement - b.statement;
+    });
+    
     for (var i = 0; i < statement.length; i++) {
-        var radio_group_name = 'radio_statement' + i;
+        var radio_group_name = 'radio_statement' + statement[i].id;
         var selector = 'input[name="' + radio_group_name + '"]:checked';
         var checked_button = document.querySelector(selector);
         // if the skip button is checked, ignore this statement
@@ -169,12 +187,12 @@ function calculate_result() {
         
         // add points for matching statement
         for (var j = 0; j < party.length; j++) {
-            for (var k = 0; k < opinion.length; k++) {
-                if (opinion[k].party === party[j].id
-                        && opinion[k].statement === statement[i].id
-                        && opinion[k].answer === user_opinion) {
-                    party[j].result++;
-                };
+            // calculate opinion id by party id and statement id
+            var opinionj = j * statement.length + i;
+            if (opinion[opinionj].party === party[j].id
+                    && opinion[opinionj].statement === statement[i].id
+                    && opinion[opinionj].answer === user_opinion) {
+                party[j].result++;
             };
         };
     };
@@ -186,7 +204,7 @@ function show_error(msg) {
         msg = 'Failed to load or parse needed data. See console for more info. Please try again!';
     };
     var final_msg = '<pre>ERROR: ' + msg + '</pre>';
-    document.getElementById('error_election').innerHTML = final_msg;
+    document.getElementById('error_election').innerHTML += final_msg;
 }
 
 // fill up the dropdown menu with available elections
@@ -237,12 +255,18 @@ function show_content() {
         show_error(null);
     } else {
         var content = '';
+        
+        // sort statement array by id asc
+        statement.sort(function(a, b) { 
+            return a.id - b.id;
+        });
+        
         for (var i = 0; i < statement.length; i++) {
-            var radio_group_name = 'radio_statement' + i;
+            var radio_group_name = 'radio_statement' + statement[i].id;
             var radio_id_skip = radio_group_name + 'skip';
             var radio_id_skip_label = 'Überspringen';
             // show statement
-            content += '<fieldset><legend><strong>' + (i + 1) + '.</strong> <em>' + escapeHtml(statement[i].text) + '</em></legend>';
+            content += '<fieldset><legend><strong>' + (statement[i].id + 1) + '.</strong> <em>' + escapeHtml(statement[i].text) + '</em></legend>';
             // create skip radio button
             content += '<input type="radio" name="' + radio_group_name + '" id="' + radio_id_skip + '" value="skip" checked><label for="' + radio_id_skip + '">' + radio_id_skip_label + '</label>';
             for (var j = 0; j < answer.length; j++) {
