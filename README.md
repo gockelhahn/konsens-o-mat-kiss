@@ -1,10 +1,10 @@
-# qual-o-mat-kiss
+# konsens-o-mat-kiss
 
-Dieses Repository enthält einen simplen POC (Proof of concept) eines "Wahl-*tools*". In der Standardeinstellung wird die Datenbasis von [qual-o-mat-data](https://github.com/gockelhahn/qual-o-mat-data) verwendet.
+Der folgende POC zeigt die Thesen mit den absoluten Stimmwerten über alle Parteien hinweg. In der Standardeinstellung wird die Datenbasis von [qual-o-mat-data](https://github.com/gockelhahn/qual-o-mat-data) verwendet.
 
 ## Preview
 
-Man kann sich [hier](https://rawgit.com/gockelhahn/qual-o-mat-kiss/master/index.html) immer die aktuelle Version anzeigen lassen.
+Man kann sich [hier](https://rawgit.com/gockelhahn/konsens-o-mat-kiss/master/index.html) immer die aktuelle Version anzeigen lassen.
 
 ## Setup
 
