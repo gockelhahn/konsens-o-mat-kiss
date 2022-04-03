@@ -4,7 +4,7 @@ Der folgende POC zeigt die Thesen mit den absoluten Stimmwerten über alle Parte
 
 ## Preview
 
-Man kann sich [hier](https://rawgit.com/gockelhahn/konsens-o-mat-kiss/master/index.html) immer die aktuelle Version anzeigen lassen.
+Man kann sich [hier](https://gockelhahn.github.io/konsens-o-mat-kiss/) immer die aktuelle Version anzeigen lassen.
 
 ## Setup
 
